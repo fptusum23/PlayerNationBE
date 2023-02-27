@@ -1,5 +1,5 @@
 export interface ILoginInAppRequest {
-    username: string,
+    email: string,
     password: string,
     ipv4?: string
 }

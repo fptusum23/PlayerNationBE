@@ -8,5 +8,7 @@ export class RefreshTokenUserRepository extends BaseSequelizeRepository<RefreshT
     async findOneByUserId(userId: string): Promise<RefreshTokenUserEntity | null> {
         return await this.model.findOne({ where: { userId } })
     }
-
+    async findOneByRefreshToken(refreshToken: string): Promise<RefreshTokenUserEntity | null> {
+        return await this.model.findOne({ where: { refreshToken } })
+    }
 }

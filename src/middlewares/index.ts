@@ -1,3 +1,4 @@
+import { AuthMiddleware } from "./auth.middleware";
 import { LoggerMiddleware } from "./logger.middleware";
 import { MorganMiddleware } from "./morgan.middleware";
 import { QueryMongoMiddleware } from "./query-mongo.middleware";
@@ -9,9 +10,11 @@ const queryMongoMiddleware = new QueryMongoMiddleware();
 const queryPostgresqlMiddleware = new QueryPostgresqlMiddleware();
 const loggerMiddleware = new LoggerMiddleware();
 const morganMiddleware = new MorganMiddleware();
+const authMiddleware = new AuthMiddleware();
 export {
     queryPostgresqlMiddleware,
     queryMongoMiddleware,
     loggerMiddleware,
-    morganMiddleware
+    morganMiddleware,
+    authMiddleware
 }

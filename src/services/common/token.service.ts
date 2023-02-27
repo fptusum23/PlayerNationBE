@@ -1,4 +1,5 @@
 import { config } from "@/configs";
+import { IAccessToken } from "@/interfaces/auth/accessToken.interface";
 import jsonwebtoken from "jsonwebtoken"
 import { errorService } from "..";
 
@@ -31,12 +32,12 @@ export class TokenService {
 
         return jsonwebtoken.sign(payload, secret, { expiresIn: option.exp })
     }
-    async decodeToken(token: string, option?: IDecodeTokenOption) {
+    decodeToken(token: string, option?: IDecodeTokenOption) {
 
         try {
             const secret = (option && option.secret) || config.server.secret;
 
-            return jsonwebtoken.verify(token, secret).valueOf();
+            return jsonwebtoken.verify(token, secret).valueOf() as IAccessToken;
         } catch (err) {
             throw errorService.auth.badToken();
         }

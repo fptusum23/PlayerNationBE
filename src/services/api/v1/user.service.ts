@@ -1,8 +1,8 @@
 import { userRepository } from "@/repositories";
-import { BaseSequelizeService } from "../../base/baseSequelize.service";
+import { BaseMongoService } from "@/services/base/baseMongo.service";
 
 
-export class UserService extends BaseSequelizeService<typeof userRepository> {
+export class UserService extends BaseMongoService<typeof userRepository> {
     constructor() {
         super(userRepository);
     }

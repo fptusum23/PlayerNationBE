@@ -13,16 +13,10 @@ export class BaseMongoController<T extends BaseMongoService<any>> extends BaseCo
   service: T
   defaultRouting() {
     this.router.get('/', this.route(this.getList));
-    this.router.get(
-      '/:_id',
-      this.route(this.getItem)
-    );
-    this.router.post('/', this.route(this.create));
-    this.router.put('/:_id', this.route(this.update));
-    this.router.delete(
-      '/:_id',
-      this.route(this.delete)
-    );
+    this.router.get('/:_id', this.route(this.getItem));
+    this.router.post('/', this.authMiddlewares(), this.route(this.create));
+    this.router.put('/:_id', this.authMiddlewares(), this.route(this.update));
+    this.router.delete('/:_id', this.authMiddlewares(), this.route(this.delete));
   }
   customRouting() { }
 

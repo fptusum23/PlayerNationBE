@@ -9,7 +9,7 @@ export class App {
         this.app = express();
         this.middleware();
 
-        this.app.use(cors.default({ origin: '*' }));
+        this.app.use(cors.default({ origin: '*', exposedHeaders: ['access-token'] }));
         this.app.set("views", path.join(__dirname, "../views"));
         this.app.set('view engine', 'ejs');
 

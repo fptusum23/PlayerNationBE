@@ -4,21 +4,14 @@ import { IHLErrorResponse } from '../../interfaces'
 import { errorService, ICrudOptionMongo, ICrudOptionSequelize } from '../../services'
 import * as _ from 'lodash'
 import { config } from '@/configs'
+import { IAccessToken } from '@/interfaces/auth/accessToken.interface'
+import { authMiddleware } from '@/middlewares'
 
 
 export interface Request extends express.Request {
     queryInfoPg?: ICrudOptionSequelize,
     queryInfoMongo?: ICrudOptionMongo
-    tokenInfo?: {
-        payload: {
-            user_id?: string,
-            account_type?: string,
-            [x: string]: any
-        },
-        account_type: string,
-        exp: any,
-        [x: string]: any
-    }
+    tokenInfo?: IAccessToken,
     [x: string]: any
 }
 export interface Response extends express.Response {
@@ -60,6 +53,7 @@ export class BaseController {
     onSuccess(res: Response, object: any = {}, extras: any = {}) {
         object = object || {}
         res.header("Access-Control-Allow-Origin", "*");
+
         if (Object.keys(object).length === 0) {
             res.json({
                 code: 200
@@ -129,4 +123,9 @@ export class BaseController {
 
             })
     }
+
+    authMiddlewares(): any[] {
+        return [authMiddleware.run()];
+    }
+
 }

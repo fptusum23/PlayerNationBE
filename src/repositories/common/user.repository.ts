@@ -1,12 +1,16 @@
-import { UserEntity } from "@/models/entities";
-import { BaseSequelizeRepository } from "../base/baseSequelize.repository";
+import { UserSchema } from "@/models/collections";
+import { BaseMongoRepository } from "../base/baseMongo.repository";
 
-export class UserRepository extends BaseSequelizeRepository<UserEntity>{
+
+export class UserRepository extends BaseMongoRepository<typeof UserSchema>{
     constructor() {
-        super(UserEntity)
+        super(UserSchema)
     }
 
-    async findByEmail(email: string): Promise<UserEntity | null> {
-        return await UserEntity.findOne({ where: { email } })
+    async findByEmail(email: string): Promise<any | null> {
+        let query = this.model.findOne()
+        query = this.applyQueryOptions(query, { filter: { email } })
+        return await this.exec(query, { allowNull: true })
+
     }
 }
