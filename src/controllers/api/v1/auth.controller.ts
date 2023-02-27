@@ -10,11 +10,17 @@ export class AuthController extends BaseController {
         super()
         this.service = authService
         this.path = 'auth'
+        this.router.get('/info', this.authMiddlewares(), this.route(this.info))
         this.router.post('/login', this.route(this.login));
         this.router.post('/register', this.route(this.userRegisterInApp));
         this.router.post('/token', this.route(this.revokeToken));
     }
     service: AuthService
+    async info(req: Request, res: Response) {
+        const _id = `${req.tokenInfo?.id}`
+        const result = await this.service.info(_id);
+        this.onSuccess(res, result);
+    }
     async login(req: Request, res: Response) {
         const { email, password } = req.body
         const loginInAppRequest: ILoginInAppRequest = {

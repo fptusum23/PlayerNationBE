@@ -24,7 +24,6 @@ export class AuthMiddleware extends BaseMiddleware {
         } else {
             throw errorService.auth.unauthorized();
         }
-        next();
     }
 
 }

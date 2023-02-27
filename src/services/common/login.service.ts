@@ -10,7 +10,10 @@ import { ERROR_MESSAGE } from "../errors/errorMessage";
 
 export class LoginService {
     constructor() { }
+    async info(_id: string): Promise<any> {
 
+        return await userRepository.findOne({ filter: { _id } });
+    }
     async userRegisterInApp(registerRequest: IRegisterUserInAppRequest): Promise<ILoginResponse> {
         const reqLogin: ILoginInAppRequest = {
             ...registerRequest

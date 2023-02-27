@@ -5,6 +5,11 @@ import { IRevokeTokenRequest } from "@/interfaces/auth/renewTokenRequest.interfa
 import { loginService } from "@/services";
 
 export class AuthService {
+    async info(_id: string): Promise<ILoginResponse> {
+        return await loginService.info(_id)
+    }
+
+
     async userLoginInApp(reqLogin: ILoginInAppRequest): Promise<ILoginResponse> {
         return await loginService.userLoginInApp(reqLogin)
     }
