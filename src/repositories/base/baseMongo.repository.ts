@@ -34,7 +34,7 @@ export class BaseMongoRepository<T extends Model<T, {}>> {
         return { count, rows }
     }
 
-    async findOne(option: ICrudOptionMongo) {
+    async findOne(option: ICrudOptionMongo){
         let query = this.model.findOne()
         query = this.applyQueryOptions(query, option)
         return await this.exec(query, { allowNull: false })

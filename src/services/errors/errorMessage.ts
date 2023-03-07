@@ -141,6 +141,14 @@ export const ERROR_MESSAGE = {
     },
     code: 400
   },
+  PASSWORD_INCORRECT: {
+    message: {
+      vi: 'Mật khẩu không đúng.',
+      en: 'Password incorrect.',
+      ko: '비밀번호 또는 사용자 이름이 올바르지 않음.',
+    },
+    code: 400
+  },
 }
 
 

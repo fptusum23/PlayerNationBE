@@ -16,6 +16,7 @@ import { PlayerService } from "./api/v1/player.service";
 import { BcryptService } from "./common/bcrypt.service";
 import { LoginService } from "./common/login.service";
 import { AuthService } from "./api/v1/auth.service";
+import { NodemailerService } from "./common/nodemailer.service";
 // import { FirebaseService } from "./common/firebase.service";
 
 const fileService = new FileService();
@@ -27,6 +28,7 @@ const utilService = new UtilService();
 const loginService = new LoginService()
 const bcryptService = new BcryptService();
 const errorService = new ErrorService();
+const nodemailerService = new NodemailerService();
 
 const nationService = new NationService();
 const userService = new UserService();
@@ -45,6 +47,7 @@ export {
   tokenService,
   bcryptService,
   imageService,
+  nodemailerService,
   fileService,
   loginService,
   //firebaseService,

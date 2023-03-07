@@ -11,6 +11,11 @@ export class UserRepository extends BaseMongoRepository<typeof UserSchema>{
         let query = this.model.findOne()
         query = this.applyQueryOptions(query, { filter: { email } })
         return await this.exec(query, { allowNull: true })
+    }
 
+    async findById(_id: string): Promise<any | null> {
+        let query = this.model.findOne()
+        query = this.applyQueryOptions(query, { filter: { _id } })
+        return await this.exec(query, { allowNull: true })
     }
 }

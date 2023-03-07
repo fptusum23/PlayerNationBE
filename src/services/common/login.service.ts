@@ -62,15 +62,14 @@ export class LoginService {
             throw errorService.auth.errorCustom(ERROR_MESSAGE.USERNAME_DOES_NOT_EXIST);
         }
 
-        console.log("password ===> ", password)
-        console.log("password ===> ", userEntity.password)
+
         if (!await bcryptService.compareDataWithHash(password, userEntity.password)) {
             throw errorService.auth.errorCustom(ERROR_MESSAGE.PASSWORD_OR_USERNAME_INCORRECT)
         }
         const accessTokenPayload: IAccessToken = {
-            id: userEntity.id,
+            id: userEntity._id,
             loginType: userEntity.loginType,
-            roles: [ERole.NORMAL],
+            roles: [userEntity.role],
             type: "USER"
         }
 
