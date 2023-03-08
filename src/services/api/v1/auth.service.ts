@@ -56,13 +56,14 @@ export class AuthService {
         }
         const accessToken = await loginService.generateAccessToken(accessTokenPayload);
         const url = `${callbackUrl}?token=${accessToken}`
+    
         return await nodemailerService.sendEmail({
             to: email,
             preview: `Hello ${email}`,
             description: `  
              <p style="text-align: center">
                 <a href="${url}"
-                style=" margin: auto; background:#868686;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; padding:16px 20px;display:inline-block;border-radius:2px;">비밀번호
+                style=" margin: auto; background:#868686;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; padding:16px 20px;display:inline-block;border-radius:2px;">
                 Click me</a>
              </p>
         `
