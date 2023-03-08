@@ -24,17 +24,22 @@ export class BaseMongoRepository<T extends Model<T, {}>> {
         return await mongoose.startSession();
     }
     async findAndCountAll(option: ICrudOptionMongo) {
-        let query = this.model.find();
-        query = this.applyQueryOptions(query, option)
-        query.setOptions({
+        const query = this.model.find();
+        const queryAll = this.applyQueryOptions(query.clone(), option)
+        queryAll.setOptions({
             toJson: { virtual: true }
         })
-        const rows = await this.exec(query);
-        const count = await this.exec(query.clone().count())
+        const rows = await this.exec(queryAll);
+        delete option.limit
+        const countQuery = this.applyQueryOptions(query.clone(), option)
+        countQuery.setOptions({
+            toJson: { virtual: true }
+        })
+        const count = await this.exec(countQuery.count())
         return { count, rows }
     }
 
-    async findOne(option: ICrudOptionMongo){
+    async findOne(option: ICrudOptionMongo) {
         let query = this.model.findOne()
         query = this.applyQueryOptions(query, option)
         return await this.exec(query, { allowNull: false })
